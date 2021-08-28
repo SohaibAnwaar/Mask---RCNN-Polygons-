@@ -16,17 +16,23 @@ Load images into [via_image_annotator](image_annotator.html). Go to the load opt
 
 ![Load Images](./videos/add_images.gif)
 
+<br> <br>
+
 ### 3. Setup Labels
 
 Setup your labels (objects you want to annotate), In the left vertical tab you can see attributes tab, press the tab and fill up the region attributes form.  I hard-coded the region attribute as (class) so name it class only, select the type (checkbox , dropdown, text, radio)etc depends on your problem. I prefer to use checkbox, than you have to add object names which you want to annotate, first object will always be empty class, (Read mrcnn-aglo to understand this)
 
 ![Setup Labels](./videos/setting_up_labels.gif)
 
+<br> <br>
+
 ### 4. Annotate Images
 
 Now you have to annotate images, you can use, rectangle, polygon, polyline, circle etc according to your problem. In this git we made all the things according to the polygons. Will add rectangle later.
 
 ![Setup Labels](./videos/annotations.gif)
+
+<br> <br>
 
 ### 5. Save your annotations
 
