@@ -276,7 +276,7 @@ class Augmentation:
             
             # Looping through all of the angles
                 # 1. Augment images every 4 angles
-            for angle in range(0, 360, 4):
+            for angle in range(0, 360, 360):
                 
                 # Logging for thread created
                 self.pending += 1
