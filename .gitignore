@@ -2,3 +2,4 @@
 *.ipynb_checkpoints*
 *.DS_store*
 *.h5*
+*__pycache__*
