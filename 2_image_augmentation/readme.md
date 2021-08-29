@@ -46,3 +46,12 @@ Sample 2
 Sample 3
 
 ![Image Augment 3](./extras/3.png)
+
+
+# Author 
+
+* Sohaib Anwaar
+* gmail          : sohaibanwaar36@gmail.com
+* linkedin       : [Have Some Professional Talk here](https://www.linkedin.com/in/sohaib-anwaar-4b7ba1187/)
+* Stack Overflow : [Get my help Here](https://stackoverflow.com/users/7959545/sohaib-anwaar)
+* Kaggle         : [View my master-pieces here](https://www.kaggle.com/sohaibanwaar1203)

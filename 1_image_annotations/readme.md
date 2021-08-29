@@ -39,3 +39,12 @@ Now you have to annotate images, you can use, rectangle, polygon, polyline, circ
 After all of the annotation you have to save annotation file. Save your project, Go to the project dropdown at the top-bar and in the last you can see save button press the button and click ok your project will be saved. You can also export your annotations in csv, json, yml etc.
 
 ![Setup Labels](./videos/saving_annotations.gif)
+
+
+# Author 
+
+* Sohaib Anwaar
+* gmail          : sohaibanwaar36@gmail.com
+* linkedin       : [Have Some Professional Talk here](https://www.linkedin.com/in/sohaib-anwaar-4b7ba1187/)
+* Stack Overflow : [Get my help Here](https://stackoverflow.com/users/7959545/sohaib-anwaar)
+* Kaggle         : [View my master-pieces here](https://www.kaggle.com/sohaibanwaar1203)
