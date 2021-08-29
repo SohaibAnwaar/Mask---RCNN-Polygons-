@@ -32,13 +32,6 @@ def display(display_list):
         plt.axis('off')
     plt.show()
 
-def rotate(image_array: ndarray, angle):
-    '''
-        Rotate image to the specefic angle
-    
-    '''
-    return ndimage.rotate(image_array, angle, reshape=True, order=0)
-
 
 def brightness(img, brightness):
     '''
@@ -192,15 +185,15 @@ class Augmentation:
     
     '''
     
-    def __init__(self, DIR_PATH):
+    def __init__(self, DIR_PATH, degree = 2):
         
         '''
             Initilizing all the variables 
         '''
         from multiprocessing.pool import ThreadPool
         
-        # Creating thread pool of 64
-        self.pool = ThreadPool(64)
+        # Creating thread pool of 32
+        self.pool = ThreadPool(32)
         
         # Creating dict for augmenting images
         self.augmented_images = dict()
@@ -213,6 +206,10 @@ class Augmentation:
         
         # Removing previous annotations
         shutil.rmtree(self.DIR_PATH, True)
+        
+        
+        # Rotation degrees (Rotate every image at angle)
+        self.degree = degree
         
         # creating and changing the permissions of folder created
         if not os.path.exists(self.DIR_PATH):
@@ -276,7 +273,7 @@ class Augmentation:
             
             # Looping through all of the angles
                 # 1. Augment images every 4 angles
-            for angle in range(0, 360, 360):
+            for angle in range(0, 360, self.degree):
                 
                 # Logging for thread created
                 self.pending += 1
@@ -330,10 +327,10 @@ class Augmentation:
         mask = make_mask(coordinates,size)
         
         # Rotating the image
-        augmented = pil_image.rotate(angle)
+        augmented = pil_image.rotate(angle, expand = True)
         
         # Rotating the mask
-        augmented_mask = mask.rotate(angle)
+        augmented_mask = mask.rotate(angle, expand = True)
         
         # Adding sharpness
         sharpness = random.randint(100, 200)/100.0
