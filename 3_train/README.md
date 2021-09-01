@@ -6,25 +6,53 @@ complicated to made a tensorflow code which is compatible with nvidia 3000 serie
 seat belts, we are going to start our drive.
 
 # Introduction:
-Main Aim of this repository is to extract data from card like first_name, last_name, plate number, address etc
+Main Aim of this repository is see if the peditraians are following the road-crossing rules or not. Means if they are walking on zebra-crossing or not.
 
 # Making Dataset.
-I took data of driving license from google images these are most probably the fake cards but no problem I only take these images for learning. So First step is to
-annotate data I used VIA image annotator (https://www.robots.ox.ac.uk/~vgg/software/via/via-1.0.1.html) to annotate my data I make a rectangle against every object
-I need Like an Image below
+I took data-frame from one of factory video camera annotate them and than do some training on the annotated images
 
 
 ## Augmentation:
 
-After doing all the annotation things I rotate the image and box at every angle (0, 360) you can easily use my notebook to get done with your annotations.
+After doing all the annotation things I rotate the image and polygons at every angle (0, 360) you can easily use my notebook to get done with your annotations. Its really complicated to use sin and cos to rotate a point with respect to the image. lol
 
 ## Training
 
-After training Just opent he training notebook give the path of the parent folder where your augmented train and val located and start the training.
+After doing the augmentations just give path of the directory where you augmentated the data. If you have done augmentation from the notebook above than your augmentation will probably be on the path where json is located.
+
+You just need to give the augmented images here.
+
+![dataset path](./extras/datasetpath.png)
+
+<br>
 
 ## Evaluation
 
-Now open the prediction notebook and just run the cells after specefiying weights paths and images path.
+After training you have to open predict notebook. Specify weights path and testing images path and tada your predictions will be their in just few seconds.
+
+**You need to set Generic Config according to train Generic Config and dont forget to give number of classes**
+
+<br>
+<br>
+
+
+
+### Prediction
+
+
+
+![prediction path](./extras/_138_.jpg)
 
 
 ## Feel free to ask any question Thank you
+
+<br>
+<br>
+
+# Author 
+
+* Sohaib Anwaar
+* gmail          : sohaibanwaar36@gmail.com
+* linkedin       : [Have Some Professional Talk here](https://www.linkedin.com/in/sohaib-anwaar-4b7ba1187/)
+* Stack Overflow : [Get my help Here](https://stackoverflow.com/users/7959545/sohaib-anwaar)
+* Kaggle         : [View my master-pieces here](https://www.kaggle.com/sohaibanwaar1203)

@@ -19,6 +19,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import cv2
+import time
+from shapely.geometry import Polygon
 
 ROOT_DIR = os.path.abspath("./")
 DIR_TO_SAVE = "./TestMarkerResults/"
@@ -43,7 +45,10 @@ def get_ax(rows=1, cols=1, size=16):
 
 
 
-def predict(model, image_path, labels):
+
+
+
+def predict(model, image_path, labels, max_score = 0.9):
     
     '''
     
@@ -55,8 +60,6 @@ def predict(model, image_path, labels):
             labels.     : Labels you used in training
             
     '''
-    print(f"labels {labels}")
-
     # Reading Image
     image = Image.open(image_path).convert('RGB')
     image = np.array(image)
@@ -68,12 +71,67 @@ def predict(model, image_path, labels):
     r = results[0]
     classes = ["background"]
     classes += labels
+    
+    scores    = []
+    mask      = []
+    class_ids = []
+    rois = []
+    
+    if r["scores"].shape[0] > 1:
+    
+        for index, i in enumerate(r["scores"]):
+            if i >= max_score:
+                
+                scores.append(r["scores"][index])
+                class_ids.append(r["class_ids"][index])
+                mask.append(r["masks"][:,:,index])
+                rois.append(r["rois"][index])
+        
+        
+        
+        
+        if len(scores) > 0:
+            r = dict({"scores" : np.asarray(scores), "class_ids" : np.asarray(class_ids), "masks" : np.asarray(mask), "rois" : np.asarray(rois)} )   
+            r['masks'] = np.rollaxis((r['masks']), 0, 3)
+        else:
+            return image , dict({}), 0
+    
+    
+    
+    people_masks =[]
+    zebra_crossing_mask = []
+    
+    
+    for index, i in enumerate(np.asarray(class_ids)):
+        if classes[i] == "person":
+            people_masks.append(r['masks'][:,:,index])
+            
+        if classes[i] == "zebracrossing":
+            zebra_crossing_mask.append(r['masks'][:,:,index])
+    
+    
+    zebra_crossing_mask = np.asarray(zebra_crossing_mask)
+    people_masks = np.asarray(people_masks)
 
-    # Displaying results
+    
+    
+    count = 0
+    for p1 in zebra_crossing_mask:
+        for p2 in people_masks:
+            c = np.logical_and(p1, p2)
+            if c.sum() == 0:
+                count +=1
+            else:
+                count = 0
+    
+
+        
+    
     out = display_instances(image,r['rois'],r['masks'],r['class_ids'],classes,r['scores'])
     plt.imshow(out)
     plt.show()
     
+    return out, r, count
 
 
 
@@ -106,6 +164,8 @@ def display_instances(image, boxes, masks, ids, names, scores):
     else:
         assert boxes.shape[0] == masks.shape[-1] == ids.shape[0]
 
+        
+        
     for i, color in enumerate(colors):
         if not np.any(boxes[i]):
             continue
